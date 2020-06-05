@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from "react";
+import Navbar from "./Navbar";
+import toDos from "./toDos";
+import Footer from "./Footer"
+import ToDoItem from "./ToDoItem";
+import Header from "./Header";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component{
+    constructor() {
+        super();
+        this.state = {
+            todos:toDos
+        }
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(id){
+        this.setState(prevState=> {
+            const updatedToDos = prevState.todos.map(todo => {
+                if(todo.id === id){
+                    todo.completed = !todo.completed
+                }
+                return todo
+            })
+            return {
+                todos: updatedToDos
+            }
+        })
+    }
+
+    render() {
+        const todoArray = this.state.todos.map(item => <ToDoItem key = {item.id} item={item} handleChange={this.handleChange}/>)
+        return(
+            <div>
+                <Header />
+                <Navbar />
+                {todoArray}
+                <Footer />
+            </div>
+        )
+    }
 }
 
 export default App;
