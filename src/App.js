@@ -4,6 +4,8 @@ import toDos from "./toDos";
 import Footer from "./Footer"
 import ToDoItem from "./ToDoItem";
 import Header from "./Header";
+import MyButton from "./MyButton";
+
 
 class App extends React.Component{
     constructor() {
@@ -35,6 +37,7 @@ class App extends React.Component{
                 <Header />
                 <Navbar />
                 {todoArray}
+                <MyButton />
                 <Footer />
             </div>
         )
